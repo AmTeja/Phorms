@@ -78,7 +78,7 @@ class LoginPage extends StatelessWidget {
                                 ref
                                     .read(authControllerProvider.notifier)
                                     .clearFields();
-                                const RegisterRoute().go(context);
+                                RegisterRoute().go(context);
                               },
                               child: Text('No account yet? Register here',
                                   style: context.textTheme.labelLarge

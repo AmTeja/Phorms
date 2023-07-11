@@ -41,7 +41,7 @@ RouteBase get $homeRoute => GoRouteData.$route(
     );
 
 extension $HomeRouteExtension on HomeRoute {
-  static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
+  static HomeRoute _fromState(GoRouterState state) => HomeRoute();
 
   String get location => GoRouteData.$location(
         '/home',
@@ -63,7 +63,7 @@ RouteBase get $loginRoute => GoRouteData.$route(
     );
 
 extension $LoginRouteExtension on LoginRoute {
-  static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
+  static LoginRoute _fromState(GoRouterState state) => LoginRoute();
 
   String get location => GoRouteData.$location(
         '/login',
@@ -85,7 +85,7 @@ RouteBase get $registerRoute => GoRouteData.$route(
     );
 
 extension $RegisterRouteExtension on RegisterRoute {
-  static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
+  static RegisterRoute _fromState(GoRouterState state) => RegisterRoute();
 
   String get location => GoRouteData.$location(
         '/register',

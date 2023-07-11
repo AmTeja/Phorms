@@ -33,36 +33,43 @@ class SplashRoute extends GoRouteData {
 }
 
 @TypedGoRoute<HomeRoute>(path: HomeRoute.path)
-class HomeRoute extends GoRouteData {
-  const HomeRoute();
+class HomeRoute extends TransitionGoRoute {
+  HomeRoute() : super(const MyHomePage(title: 'Phorms'));
   static const path = '/home';
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const MyHomePage(
-      title: 'Phorms',
-    );
-  }
 }
 
 @TypedGoRoute<LoginRoute>(path: LoginRoute.path)
-class LoginRoute extends GoRouteData {
-  const LoginRoute();
+class LoginRoute extends TransitionGoRoute {
+  LoginRoute() : super(LoginPage());
   static const path = '/login';
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return LoginPage();
-  }
 }
 
 @TypedGoRoute<RegisterRoute>(path: RegisterRoute.path)
-class RegisterRoute extends GoRouteData {
-  const RegisterRoute();
+class RegisterRoute extends TransitionGoRoute {
+  RegisterRoute() : super(RegisterPage());
   static const path = '/register';
+}
+
+class TransitionGoRoute extends GoRouteData {
+  const TransitionGoRoute(this.child, {this.toLeft = true});
+
+  final Widget child;
+  final bool toLeft;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return RegisterPage();
-  }
+  CustomTransitionPage<void> buildPage(
+          BuildContext context, GoRouterState state) =>
+      CustomTransitionPage<void>(
+        key: state.pageKey,
+        child: child,
+        transitionsBuilder: (context, animation, animation2, child) {
+          final tween = Tween<Offset>(
+            begin: toLeft ? const Offset(1, 0) : const Offset(-1, 0),
+            end: Offset.zero,
+          ).chain(CurveTween(curve: Curves.easeInOutCubic));
+
+          return SlideTransition(
+              position: animation.drive(tween), child: child);
+        },
+      );
 }

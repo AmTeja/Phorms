@@ -90,7 +90,7 @@ class RegisterPage extends StatelessWidget {
                                   ref
                                       .read(authControllerProvider.notifier)
                                       .clearFields();
-                                  const LoginRoute().go(context);
+                                  LoginRoute().go(context);
                                 },
                                 child: Text(
                                     'Already have an account? Login here',
